@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Hostname</title>
+</head>
+<body>
+    <h1>Hostname Finder</h1>
+    <p>Server Hostname: {{ server_hostname }}</p>
+
+    <script>
+        // JavaScript cannot directly access the client's machine hostname due to security restrictions
+        // But we can try to fetch the client's IP address (still not the hostname)
+
+        function getClientIP() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('client-ip').textContent = data.ip;
+                })
+                .catch(err => console.error('Error:', err));
+        }
+
+        window.onload = getClientIP;
+    </script>
+
+    <p>Your IP Address: <span id="client-ip">Loading...</span></p>
+</body>
+</html>
